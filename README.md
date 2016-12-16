@@ -1,1 +1,1 @@
-# dibs-CSG-service
+# dibs-csg-service
