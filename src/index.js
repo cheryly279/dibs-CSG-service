@@ -79,7 +79,7 @@ app.get('/topics/:topicId', (req, res) => {
 });
 
 app.post('/topic/', (req, res) => {
-    connection.query(`INSERT INTO topics (addedBy, name, description) VALUES (${req.body.addedBy}, '${req.body.name}', '${req.body.description || ''}')`, (err, result) => {
+    connection.query(`INSERT INTO topics (addedBy, name, description, url) VALUES (${req.body.addedBy}, '${req.body.name}', '${req.body.description || ''}', '${req.body.url || ''}')`, (err, result) => {
         if (err) {
             res.status(500);
             res.send(err.message);
