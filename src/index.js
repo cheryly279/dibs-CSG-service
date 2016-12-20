@@ -66,6 +66,18 @@ app.get('/topics/all', function (req, res) {
     });
 });
 
+app.get('/topics/pending', function (req, res) {
+    connection.query('SELECT * FROM topics WHERE sentDate IS NULL', (err, rows) => {
+        if (err) {
+            res.status(500);
+            res.send(err.message);
+        }
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200);
+        res.send(JSON.stringify(rows));
+    });
+});
+
 app.get('/topics/:topicId', (req, res) => {
     connection.query(`SELECT * FROM topics WHERE id = ${req.params.topicId}`, (err, rows) => {
         if (err) {
