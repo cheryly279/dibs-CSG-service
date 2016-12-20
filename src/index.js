@@ -89,6 +89,17 @@ app.post('/topic/', (req, res) => {
     });
 });
 
+app.put('/topics/sent/', (req, res) => {
+    connection.query(`UPDATE topics SET sentDate = '${req.body.sentDate}' WHERE id IN (${req.body.topicIds.join(',')});`, (err, result) => {
+        if (err) {
+            res.status(500);
+            res.send(err.message);
+        }
+        res.status(204);
+        res.send('success');
+    });
+});
+
 const server = app.listen(8081, function () {
     const host = server.address().address;
     const port = server.address().port;
